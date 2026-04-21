@@ -27,12 +27,18 @@ See issue #61 — "Custom system-prompt file: when defensive rules outlive their
 
 ## tools-only.md
 
-### [0.1.0.1-doc] — 2026-04-21 (v0.1.1 release only — no file change)
+### [0.2.0] — 2026-04-21
+
+#### Added
+- New `Operating disposition` section at the end of the file. Four operator-weighted directives reinforcing that (1) project rules in `.claude/rules/` are operator instructions not background context, (2) established scope grants authority without permission-asking, (3) full delivery chain check runs before turn-end, (4) project rules take precedence over trained chat-like dispositions.
+- Rationale: the default Anthropic system prompt directives (tengu_* family) carry trained-in operator weighting that behaviorally dominates rules in `.claude/rules/*` despite being in the same `system` field. After stripping the default directives (v0.1.0), the operator-weighted position was empty. Teams relying on project rules to govern disposition were leaving the highest-leverage position unoccupied. This section reoccupies it with pointers to project rules rather than duplicated content, keeping the file small (~7 additional lines) while restoring operator-weighted reinforcement.
+- Source trigger: Dan's live observation in session 2026-04-21 that Sage was surfacing three-option menus and deferring to user instead of executing, despite identity.md and act-dont-ask.md being continuously in context. Dan's hypothesis: the system prompt is weighted differently at training-time regardless of API position, so use the system prompt to reinforce without bloating. This release implements that hypothesis as a portable methodology artifact.
 
 #### Changed
-- No content change to `tools-only.md`. README updated with three pin paths (clone-with-checkout, clone-with-show, no-clone curl-from-raw-with-tag). Companion pointer to `ADVERSARY-TAG.md` added to the README.
-- Original `tools-only-v0.1.0` tag remains canonical for the file itself.
-- No new `tools-only-v*` tag is cut in this release because the file content is unchanged.
+- None. The pre-existing content is unchanged; the new section is purely additive.
+
+#### Known issues
+- Same Finding 1 and Finding 2 from v0.1.0 still apply (Explore nudge, subagents-excessively phrasing). Independent of the Operating disposition section — those lines live in the file's tool-guidance section, unchanged.
 
 ## tools-only.md
 
